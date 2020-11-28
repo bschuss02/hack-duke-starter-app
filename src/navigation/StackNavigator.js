@@ -19,4 +19,5 @@ class StackNavigator extends Component {
 		);
 	}
 }
+
 export default StackNavigator;
