@@ -1,16 +1,18 @@
 import React, { Component } from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Icon } from "native-base";
-import { Screen1 } from "../screens/Screen1";
-import { Screen2 } from "../screens/Screen2";
-import { Screen3 } from "../screens/Screen3";
+import Screen1 from "../screens/Screen1";
+import Screen2 from "../screens/Screen2";
+import Screen3 from "../screens/Screen3";
 
 const Tab = createBottomTabNavigator();
 
 class TabNavigator extends Component {
 	render() {
 		return (
-			<Tab.Navigator tabBarOptions={{ showLabel: false }}>
+			<Tab.Navigator
+				tabBarOptions={{ showLabel: false, style: { height: 50 } }}
+			>
 				<Tab.Screen
 					name="Screen1"
 					component={Screen1}
