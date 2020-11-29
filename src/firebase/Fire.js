@@ -19,6 +19,7 @@ class Fire {
 		}
 		this.firebase = firebase;
 		this.db = firebase.firestore();
+		this.auth = firebase.auth();
 	}
 }
 

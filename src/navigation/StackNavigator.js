@@ -4,6 +4,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { TabNavigator } from "./TabNavigator";
 import Login from "../screens/Login";
 import Signup from "../screens/Signup";
+import Loading from "../screens/Loading";
 
 const Stack = createStackNavigator();
 
@@ -11,9 +12,10 @@ class StackNavigator extends Component {
 	render() {
 		return (
 			<Stack.Navigator
-				initialRouteName="Main"
-				screenOptions={{ headerShown: false }}
+				initialRouteName="Loading"
+				screenOptions={{ headerShown: false, animationEnabled: false }}
 			>
+				<Stack.Screen name="Loading" component={Loading} />
 				<Stack.Screen name="Login" component={Login} />
 				<Stack.Screen name="Signup" component={Signup} />
 				<Stack.Screen name="Main" component={TabNavigator} />

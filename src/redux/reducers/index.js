@@ -1,9 +1,9 @@
-const initialState = { testingThing: "fuck" };
+const initialState = { user: false };
 
 const rootReducer = (state = initialState, action) => {
 	switch (action.type) {
-		case "testReducer": {
-			return { ...state, testThing: state.testThing + " fuck" };
+		case "CHECKED_SIGNED_IN_USER": {
+			return { ...state, user: action.user };
 		}
 
 		default: {

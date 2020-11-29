@@ -33,7 +33,7 @@ class Screen2 extends Component {
 	}
 }
 const mapStateToProps = (state) => ({});
-const mapDispatchToProps = (state) => ({});
+const mapDispatchToProps = (dispatch) => ({});
 
 export default connect(mapStateToProps, mapDispatchToProps)(Screen2);
 
