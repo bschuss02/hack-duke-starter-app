@@ -11,7 +11,7 @@ class StackNavigator extends Component {
 	render() {
 		return (
 			<Stack.Navigator
-				initialRouteName="Login"
+				initialRouteName="Main"
 				screenOptions={{ headerShown: false }}
 			>
 				<Stack.Screen name="Login" component={Login} />

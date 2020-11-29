@@ -15,6 +15,7 @@ import {
 	ListItem,
 	Badge,
 } from "native-base";
+import { connect } from "react-redux";
 
 class Screen3 extends Component {
 	render() {
@@ -32,7 +33,10 @@ class Screen3 extends Component {
 		);
 	}
 }
-export default Screen3;
+const mapStateToProps = (state) => ({});
+const mapDispatchToProps = (state) => ({});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Screen3);
 
 const styles = StyleSheet.create({
 	container: {

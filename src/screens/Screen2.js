@@ -14,6 +14,7 @@ import {
 	Content,
 	ListItem,
 } from "native-base";
+import { connect } from "react-redux";
 
 class Screen2 extends Component {
 	render() {
@@ -31,7 +32,10 @@ class Screen2 extends Component {
 		);
 	}
 }
-export default Screen2;
+const mapStateToProps = (state) => ({});
+const mapDispatchToProps = (state) => ({});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Screen2);
 
 const styles = StyleSheet.create({
 	container: {

@@ -64,7 +64,7 @@ class Signup extends Component {
 								this.props.navigation.navigate("Login");
 							}}
 						>
-							<Text>Already have an account? Sign Up</Text>
+							<Text>Already have an account? Sign Up </Text>
 						</Button>
 					</View>
 				</Content>
