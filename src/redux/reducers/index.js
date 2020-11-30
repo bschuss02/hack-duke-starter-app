@@ -37,6 +37,16 @@ const rootReducer = (state = initialState, action) => {
 			};
 		}
 
+		case "UPDATE_MESSAGES": {
+			return {
+				...state,
+				user: {
+					...state.user,
+					messages: [...state.user.messages, action.message],
+				},
+			};
+		}
+
 		default: {
 			return { ...state };
 		}

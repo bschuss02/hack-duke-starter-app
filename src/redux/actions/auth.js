@@ -4,14 +4,23 @@ const fire = new Fire();
 const { firebase, db, auth } = fire;
 
 const checkForSignedInUser = () => {
-	return (dispatch, getState) => {
-		auth.onAuthStateChanged((user) => {
+	return async (dispatch, getState) => {
+		auth.onAuthStateChanged(async (user) => {
 			let userData = null;
 			if (user !== null) {
+				const idToken = await auth.currentUser.getIdToken();
+				const querySnapshot = await db
+					.collection("users")
+					.doc(idToken)
+					.get();
+				const queryData = querySnapshot.data();
+				const { messages } = queryData;
+
 				userData = {
 					email: user.email,
 					displayName: user.displayName,
 					uid: user.uid,
+					messages,
 				};
 			}
 
@@ -45,6 +54,13 @@ const signup = (name, email, password) => {
 			}
 			const result = await auth.createUserWithEmailAndPassword(email, password);
 			await result.user.updateProfile({ displayName: name });
+
+			const idToken = await auth.currentUser.getIdToken();
+
+			await db
+				.collection("users")
+				.doc(idToken)
+				.set({ messages: [] });
 		} catch (error) {
 			dispatch({ type: "SET_ERROR", errorType: "signupError", error });
 		}
