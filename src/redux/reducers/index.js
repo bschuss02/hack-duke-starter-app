@@ -1,4 +1,7 @@
-const initialState = { user: false, errors: { loginError: null } };
+const initialState = {
+	user: false,
+	errors: { loginError: null, signupError: null },
+};
 
 const rootReducer = (state = initialState, action) => {
 	switch (action.type) {
@@ -8,24 +11,26 @@ const rootReducer = (state = initialState, action) => {
 
 		case "LOGIN_SUCCESS": {
 			console.log("\nlogin success reducer");
-			return { ...state };
+
+			return { ...state, user: { ...action.user } };
 		}
 
-		case "LOGIN_ERROR": {
-			console.log("\nlogin error reducer");
+		case "SET_ERROR": {
+			console.log("set error reducer");
 			return {
 				...state,
-				errors: { ...state.errors, loginError: action.error },
+				errors: { ...state.errors, [action.errorType]: action.error },
 			};
+		}
+
+		case "SIGNOUT": {
+			console.log("signout reducer");
+			return { ...state, user: null };
 		}
 
 		case "CLEAR_ERROR": {
 			console.log("\nclear error reducer");
 
-			console.log(
-				"🚀 ~ file: index.js ~ line 25 ~ rootReducer ~ action.errorType",
-				action.errorType,
-			);
 			return {
 				...state,
 				errors: { ...state.errors, [action.errorType]: null },

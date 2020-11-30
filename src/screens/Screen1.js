@@ -28,13 +28,22 @@ class Screen1 extends Component {
 				</Header>
 				<Content contentContainerStyle={styles.container}>
 					<Text>Screen1</Text>
+					{this.props.user && (
+						<View style={{ alignItems: "center", margin: 5 }}>
+							<Text>{`name: ${this.props.user.displayName}`}</Text>
+							<Text>{`email: ${this.props.user.email}`}</Text>
+							<Text>{`uid: ${this.props.user.uid}`}</Text>
+						</View>
+					)}
 				</Content>
 			</Container>
 		);
 	}
 }
 
-const mapStateToProps = (state) => ({});
+const mapStateToProps = (state) => ({
+	user: state.user,
+});
 const mapDispatchToProps = (dispatch) => ({});
 
 export default connect(mapStateToProps, mapDispatchToProps)(Screen1);

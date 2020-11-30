@@ -29,6 +29,10 @@ class Login extends Component {
 		password: "",
 	};
 
+	resetState() {
+		this.setState({ email: "", password: "" });
+	}
+
 	render() {
 		const { width, height } = Dimensions.get("window");
 		const { email, password } = this.state;
@@ -78,6 +82,7 @@ class Login extends Component {
 							transparent
 							onPress={() => {
 								this.props.navigation.navigate("Signup");
+								this.resetState();
 							}}
 						>
 							<Text>Don't have an account? Sign Up</Text>
