@@ -17,19 +17,21 @@ import {
 	Input,
 	Item,
 } from "native-base";
+import { login } from "../redux/actions/auth";
+import { connect } from "react-redux";
 LogBox.ignoreLogs([
 	"currentlyFocusedField is deprecated and will be removed in a future release. Use currentlyFocusedInput",
 ]);
 
 class Login extends Component {
 	state = {
-		username: "",
+		email: "",
 		password: "",
 	};
 
 	render() {
 		const { width, height } = Dimensions.get("window");
-		const { username, password } = this.state;
+		const { email, password } = this.state;
 
 		return (
 			<Container>
@@ -43,28 +45,37 @@ class Login extends Component {
 						<Item rounded style={{ borderColor: "gray", margin: 5 }}>
 							<Icon name="md-mail" />
 							<Input
-								placeholder="Username"
-								value={username}
-								onChangeText={(username) => this.setState({ username })}
+								placeholder="Email"
+								autoCapitalize="none"
+								value={email}
+								onChangeText={(email) => this.setState({ email })}
 							/>
 						</Item>
 						<Item rounded style={{ borderColor: "gray", margin: 5 }}>
 							<Icon name="md-key" />
 							<Input
 								placeholder="Password"
+								autoCapitalize="none"
+								secureTextEntry
 								value={password}
 								onChangeText={(password) => this.setState({ password })}
 							/>
 						</Item>
 					</Form>
 					<View style={{ alignItems: "center", margin: 5 }}>
-						<Button rounded>
+						<Button
+							rounded
+							onPress={() => {
+								this.props.login(email, password);
+							}}
+						>
 							<Text>Log In</Text>
 						</Button>
 					</View>
 					<View style={{ alignItems: "center", margin: 5 }}>
 						<Button
 							rounded
+							transparent
 							onPress={() => {
 								this.props.navigation.navigate("Signup");
 							}}
@@ -77,7 +88,16 @@ class Login extends Component {
 		);
 	}
 }
-export default Login;
+
+const mapStateToProps = (state) => ({
+	loginError: state.errors.loginError,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+	login: (email, password) => dispatch(login(email, password)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);
 
 const styles = StyleSheet.create({
 	container: {

@@ -24,7 +24,7 @@ class Loading extends Component {
 
 	componentDidUpdate() {
 		if (this.props.user === null) {
-			this.props.navigation.navigate("Signup");
+			this.props.navigation.navigate("Login");
 		}
 		if (this.props.user) {
 			this.props.navigation.navigate("Main");

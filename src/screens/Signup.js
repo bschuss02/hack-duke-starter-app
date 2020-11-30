@@ -17,15 +17,17 @@ import {
 	Input,
 	Item,
 } from "native-base";
+import { connect } from "react-redux";
+import { signup } from "../redux/actions/auth";
 
 class Signup extends Component {
 	state = {
-		username: "",
+		email: "",
 		password: "",
 	};
 	render() {
 		const { width, height } = Dimensions.get("window");
-		const { username, password } = this.state;
+		const { email, password } = this.state;
 		return (
 			<Container>
 				<Header>
@@ -38,15 +40,17 @@ class Signup extends Component {
 						<Item rounded style={{ borderColor: "gray", margin: 5 }}>
 							<Icon name="md-mail" />
 							<Input
-								placeholder="Username"
-								value={username}
-								onChangeText={(username) => this.setState({ username })}
+								placeholder="Email"
+								autoCapitalize="none"
+								value={email}
+								onChangeText={(email) => this.setState({ email })}
 							/>
 						</Item>
 						<Item rounded style={{ borderColor: "gray", margin: 5 }}>
 							<Icon name="md-key" />
 							<Input
 								placeholder="Password"
+								autoCapitalize="none"
 								value={password}
 								secureTextEntry
 								onChangeText={(password) => this.setState({ password })}
@@ -61,11 +65,12 @@ class Signup extends Component {
 					<View style={{ alignItems: "center", margin: 5 }}>
 						<Button
 							rounded
+							transparent
 							onPress={() => {
 								this.props.navigation.navigate("Login");
 							}}
 						>
-							<Text>Already have an account? Sign Up </Text>
+							<Text>Already have an account? Log in </Text>
 						</Button>
 					</View>
 				</Content>
@@ -73,7 +78,14 @@ class Signup extends Component {
 		);
 	}
 }
-export default Signup;
+
+const mapStateToProps = (state) => ({});
+
+const mapDispatchToProps = (dispatch) => ({
+	signup: (email, password) => dispatch(signup(email, password)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Signup);
 
 const styles = StyleSheet.create({
 	container: {

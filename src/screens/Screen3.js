@@ -16,6 +16,7 @@ import {
 	Badge,
 } from "native-base";
 import { connect } from "react-redux";
+import { signout } from "../redux/actions/auth";
 
 class Screen3 extends Component {
 	render() {
@@ -28,13 +29,25 @@ class Screen3 extends Component {
 				</Header>
 				<Content contentContainerStyle={styles.container}>
 					<Text>Screen3</Text>
+					<View style={{ alignItems: "center", margin: 5 }}>
+						<Button
+							rounded
+							onPress={() => {
+								this.props.signout();
+							}}
+						>
+							<Text>Log Out</Text>
+						</Button>
+					</View>
 				</Content>
 			</Container>
 		);
 	}
 }
 const mapStateToProps = (state) => ({});
-const mapDispatchToProps = (dispatch) => ({});
+const mapDispatchToProps = (dispatch) => ({
+	signout: () => dispatch(signout()),
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(Screen3);
 
