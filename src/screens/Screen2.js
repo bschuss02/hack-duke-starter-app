@@ -42,7 +42,6 @@ class Screen2 extends Component {
 					</Body>
 				</Header>
 				<Content contentContainerStyle={styles.container}>
-					<Text>Screen2</Text>
 					<Form style={{ width, padding: 10 }}>
 						<Item rounded style={{ borderColor: "gray", margin: 5 }}>
 							<Icon type="Ionicons" name="document" />
@@ -66,19 +65,20 @@ class Screen2 extends Component {
 						</Button>
 					</View>
 					<List>
-						{messages.map((text) => (
-							<View
-								key={text}
-								style={{
-									backgroundColor: "gray",
-									width,
-									padding: 5,
-									margin: 5,
-								}}
-							>
-								<Text>{text}</Text>
-							</View>
-						))}
+						{messages &&
+							messages.map((text) => (
+								<View
+									key={text}
+									style={{
+										backgroundColor: "gray",
+										width,
+										padding: 5,
+										margin: 5,
+									}}
+								>
+									<Text>{text}</Text>
+								</View>
+							))}
 					</List>
 				</Content>
 			</Container>

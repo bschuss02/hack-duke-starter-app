@@ -27,7 +27,6 @@ class Screen1 extends Component {
 					</Body>
 				</Header>
 				<Content contentContainerStyle={styles.container}>
-					<Text>Screen1</Text>
 					{this.props.user && (
 						<View style={{ alignItems: "center", margin: 5 }}>
 							<Text>{`name: ${this.props.user.displayName}`}</Text>

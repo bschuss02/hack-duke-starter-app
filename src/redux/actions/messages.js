@@ -4,13 +4,11 @@ const { firebase, db, auth } = fire;
 
 const sendMessage = (message) => {
 	return async (dispatch, getState) => {
-		console.log("sending message");
-
-		const idToken = await auth.currentUser.getIdToken();
 		if (message) {
+			const currentUid = auth.currentUser.uid;
 			await db
 				.collection("users")
-				.doc(idToken)
+				.doc(currentUid)
 				.update({
 					messages: firebase.firestore.FieldValue.arrayUnion(message),
 				});

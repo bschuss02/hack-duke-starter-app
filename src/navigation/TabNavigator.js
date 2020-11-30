@@ -11,7 +11,7 @@ class TabNavigator extends Component {
 	render() {
 		return (
 			<Tab.Navigator
-				tabBarOptions={{ showLabel: false, style: { height: 50 } }}
+				tabBarOptions={{ showLabel: false, style: { height: 60 } }}
 			>
 				<Tab.Screen
 					name="Screen1"
@@ -31,7 +31,7 @@ class TabNavigator extends Component {
 					options={{
 						tabBarIcon: ({ focused }) => (
 							<Icon
-								name="person"
+								name="add"
 								style={{ color: focused ? "#147EFB" : "gray" }}
 							/>
 						),
@@ -43,7 +43,7 @@ class TabNavigator extends Component {
 					options={{
 						tabBarIcon: ({ focused }) => (
 							<Icon
-								name="person"
+								name="ios-log-out"
 								style={{ color: focused ? "#147EFB" : "gray" }}
 							/>
 						),

@@ -1,22 +1,20 @@
 const initialState = {
-	user: false,
+	user: { isSignedIn: false, messages: [] },
 	errors: { loginError: null, signupError: null },
 };
 
 const rootReducer = (state = initialState, action) => {
+	console.log(action.type);
 	switch (action.type) {
 		case "CHECKED_SIGNED_IN_USER": {
 			return { ...state, user: action.user };
 		}
 
 		case "LOGIN_SUCCESS": {
-			console.log("\nlogin success reducer");
-
-			return { ...state, user: { ...action.user } };
+			return { ...state, user: { ...state.user, ...action.user } };
 		}
 
 		case "SET_ERROR": {
-			console.log("set error reducer");
 			return {
 				...state,
 				errors: { ...state.errors, [action.errorType]: action.error },
@@ -24,13 +22,10 @@ const rootReducer = (state = initialState, action) => {
 		}
 
 		case "SIGNOUT": {
-			console.log("signout reducer");
-			return { ...state, user: null };
+			return { ...state, user: { isSignedIn: false } };
 		}
 
 		case "CLEAR_ERROR": {
-			console.log("\nclear error reducer");
-
 			return {
 				...state,
 				errors: { ...state.errors, [action.errorType]: null },

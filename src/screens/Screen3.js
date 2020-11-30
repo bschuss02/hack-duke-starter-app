@@ -28,7 +28,6 @@ class Screen3 extends Component {
 					</Body>
 				</Header>
 				<Content contentContainerStyle={styles.container}>
-					<Text>Screen3</Text>
 					<View style={{ alignItems: "center", margin: 5 }}>
 						<Button
 							rounded

@@ -6,14 +6,16 @@ const { firebase, db, auth } = fire;
 const checkForSignedInUser = () => {
 	return async (dispatch, getState) => {
 		auth.onAuthStateChanged(async (user) => {
-			let userData = null;
+			let userData = { isSignedIn: false };
 			if (user !== null) {
-				const idToken = await auth.currentUser.getIdToken();
+				const currentUid = auth.currentUser.uid;
+
 				const querySnapshot = await db
 					.collection("users")
-					.doc(idToken)
+					.doc(currentUid)
 					.get();
 				const queryData = querySnapshot.data();
+
 				const { messages } = queryData;
 
 				userData = {
@@ -21,9 +23,9 @@ const checkForSignedInUser = () => {
 					displayName: user.displayName,
 					uid: user.uid,
 					messages,
+					isSignedIn: true,
 				};
 			}
-
 			dispatch({ type: "CHECKED_SIGNED_IN_USER", user: userData });
 		});
 	};
@@ -55,11 +57,10 @@ const signup = (name, email, password) => {
 			const result = await auth.createUserWithEmailAndPassword(email, password);
 			await result.user.updateProfile({ displayName: name });
 
-			const idToken = await auth.currentUser.getIdToken();
-
+			const currentUid = auth.currentUser.uid;
 			await db
 				.collection("users")
-				.doc(idToken)
+				.doc(currentUid)
 				.set({ messages: [] });
 		} catch (error) {
 			dispatch({ type: "SET_ERROR", errorType: "signupError", error });
